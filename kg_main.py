@@ -1,14 +1,14 @@
 import sys
 
 def check_lens(s1_len, s2_len):
-    """Check the length of the strings to ensure property (1) of a one-to-one mapping. Returns boolean."""
+    """Check the length of the strings to ensure Property (1) of a one-to-one mapping. Returns boolean."""
     if s1_len <= s2_len and s1_len > 0:
         return True
     return False
 
 def generate_freqs(s1):
     """Generate the frequencies of each character in s1 to help determine 
-    if a one-to-one mapping is possible. Returns dictionary."""
+    if a one-to-one mapping is possible - Property (2). Returns dictionary."""
     freqs = {}
     for c in s1:
         if c not in freqs:
@@ -19,7 +19,7 @@ def generate_freqs(s1):
 
 def frequency_check(freqDict):
     """Check to ensure there are unique characters in s1 using the frequency dictionary
-    because two of the same characters cannot possibly map one-to-one. Returns boolean."""
+    because two of the same characters cannot possibly map one-to-one - Property (2). Returns boolean."""
 
     for value in freqDict.values():
         if value > 1:
@@ -43,29 +43,21 @@ if len(sys.argv) != 3:
   
 # Getting the command line args
 argsList = list(sys.argv)
-
 s1, s2 = argsList[1], argsList[2]
-
-print(s1)
-print(s2)
 
 #Resolving Property (1)
 len_check = check_lens(len(s1), len(s2))
 
-if not len_check:
+if len_check == False:
     #If we are here, s1's length is greater than s2's length so a one-to-one mapping isn't possible
     sys.exit("False")
 
 
 #Resolving Property (2)
 freq = generate_freqs(s1)
-
-for x,y in freq.items():
-    print(x,y)
-
 freq_check = frequency_check(freq)
 
-if not freq_check:
+if freq_check == False:
     sys.exit("False")
 
 #If we get this far, s1 can be mapped one-to-one to s2 
